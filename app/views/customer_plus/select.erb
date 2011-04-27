@@ -1,0 +1,27 @@
+<div class="contextual">
+  <%= link_to_if_authorized l(:label_customer_view), {:controller => 'customers', :action => 'show', :id => @project}, :class => 'icon icon-user' %>
+  <%= link_to_if_authorized l(:label_customer_assign), {:controller => 'customers', :action => 'select', :id => @project}, :class => 'icon icon-move' %>
+  <%= link_to_if_authorized l(:label_customer_list), {:controller => 'customers', :action => 'list', :id => @project}, :class => 'icon icon-users' %>
+  <%= link_to_if_authorized l(:label_customer_new), {:controller => 'customers', :action => 'new', :id => @project}, :class => 'icon icon-add' %>
+</div>
+
+<h2><%= l(:label_customer_assign) %></h2>
+
+<% form_for :customer, :url =>{:action => 'assign', :id => @project} do |f|  %>
+  <div class="box">
+    <p>
+    <label for="customer"><%= l(:label_customer) %></label>
+    <p>
+    <p>
+      <%= collection_select(:customer, :id, @customers, :id, :pretty_name) -%>
+    </p>
+  </div>
+  <%= submit_tag l(:button_save) -%>
+
+<% end -%>
+
+<% content_for(:header_tags) do %>
+  <style type="text/css">
+    .icon-users { background-image: url(../../images/users.png); }
+  </style>
+<% end %>

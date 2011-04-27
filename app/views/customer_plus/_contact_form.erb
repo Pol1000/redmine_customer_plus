@@ -1,0 +1,20 @@
+<%= error_messages_for 'customer' %>
+<%= f.hidden_field 'customer_id' %>
+<%= f.hidden_field 'id' %>
+<div class="box"> 
+  <p>
+    <%= f.text_field 'name', :label=>l(:field_customer_name) -%>
+  </p>
+  <p>
+    <%= f.text_field 'field', :label=>l(:field_customer_field) -%>
+  </p>
+  <p>
+    <%= f.text_area 'address', :label=>l(:field_customer_address), :rows => 5 -%>
+  </p>
+  <p>
+    <%= f.text_field 'phone', :label=>l(:field_customer_phone) -%>
+  </p>
+  <p>
+    <%= f.text_field 'email', :label=>l(:field_customer_email) -%>
+  </p>
+</div>

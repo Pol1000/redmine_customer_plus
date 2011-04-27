@@ -1,0 +1,7 @@
+<div class="box">
+  <p> <%= l(:field_customer_name) %>: <%= h customer_contact.name %> </p>
+  <p> <%= l(:field_customer_field) %>: <%= h customer_contact.field %> </p>
+  <p> <%= l(:field_customer_address) %>: <%= h customer_contact.address %> </p>
+  <p> <%= l(:field_customer_phone) %>: <%= h customer_contact.phone %> </p>
+  <p> <%= l(:field_customer_email) %>: <%= mail_to customer_contact.email unless customer_contact.email.blank? %> </p>
+</div>

@@ -1,0 +1,82 @@
+<% 
+statuses = IssueStatus.find :all
+@settings ||= {}
+@settings['statuses'] ||= []
+@settings['changes'] ||= {}
+@settings['custom_fields'] ||= []
+@settings['save_customer_to'] ||= []
+issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
+%>
+
+<div class="autoscroll">
+<% unless issue_custom_fields.empty? %>
+  <h2>Campi personalizzati visualizzati:</h2>
+  <div class="list">
+  <% issue_custom_fields.each do |custom_field| %>
+    <label class="floating">
+	  <%= check_box_tag 'settings[custom_fields][]', custom_field.id, @settings['custom_fields'].include?(custom_field.id.to_s) %>
+	  <%= custom_field.name %>
+	</label>
+  <% end %>
+  <div style="clear: both"></div>
+  <br><br>
+  </div>
+<% end %>  
+    
+    <h2>Stati visualizzati:</h2>
+    <div class="list">
+<% for status in statuses %>
+      <label class="floating">
+      <%= check_box_tag "settings[statuses][]", status.id, @settings['statuses'].include?(status.id.to_s) %>	
+      <%= status.name %>
+      </label>
+<% end %>
+      <div style="clear: both"></div>
+      <br><br>
+    </div>
+
+         </tbody>
+    </table>
+  <h2>Cambiamenti visualizzati:</h2>
+  <table class="list">
+    <tbody>
+      <tr>
+        <td>Commenti</td>
+        <td><%= check_box_tag "settings[changes][just_comments]", status.id, @settings['changes']['just_comments'] %>
+      </tr>
+      <tr>
+        <td><%=l(:field_subject)%></td>
+        <td><%= check_box_tag "settings[changes][subject]", status.id, @settings['changes']['subject'] %>	
+      </tr>
+      <tr>
+        <td><%=l(:field_done_ratio)%></td>
+        <td><%= check_box_tag "settings[changes][done_ratio]", status.id, @settings['changes']['done_ratio'] %>	
+      </tr>
+      <tr>
+        <td><%=l(:field_assigned_to)%></td>
+        <td><%= check_box_tag "settings[changes][assigned_to_id]", status.id, @settings['changes']['assigned_to_id'] %>	
+      </tr>
+      <tr>
+        <td><%=l(:field_tracker)%></td>
+        <td><%= check_box_tag "settings[changes][tracker_id]", status.id, @settings['changes']['tracker_id'] %>	
+      </tr>
+      <tr>
+        <td><%=l(:label_attachment)%></td>
+        <td><%= check_box_tag "settings[changes][attachment]", status.id, @settings['changes']['attachment'] %>	
+      </tr>
+    </tbody>
+  </table>
+  <h2>Salva cliente in:</h2>
+  <div class="list">
+<% issue_custom_fields.each do |custom_field| %>    
+  <% next unless ["string", "list"].include?(custom_field.field_format) %>
+     <label class="floating">
+  	  <%= check_box_tag 'settings[save_customer_to][]', custom_field.id, @settings['save_customer_to'].include?(custom_field.id.to_s) %>
+  	  <%= custom_field.name %>
+  	 </label>
+<% end %>
+  <div style="clear: both"></div>
+  <br><br>
+  </div>
+
+</div>

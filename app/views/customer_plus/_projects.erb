@@ -1,0 +1,52 @@
+<% 
+projects = Project.active.find(:all, :order => 'lft') - @customer.projects 
+%>
+
+<div class="splitcontentleft">
+<% if @customer.projects.any? %>
+	<table class="list projects">
+		<thead>
+		  <th><%= l(:label_project) %></th>
+		  <th style="width:15%"></th>
+		</thead>
+		<tbody>
+		<% @customer.projects.each do |project| %>
+			<tr id="project-<%= project.id %>" class="<%= cycle 'odd', 'even' %>">
+				<td class="project"><%= link_to project.name, :controller => 'projects', :action => 'show', :id => project.id %></td>
+			  <td class="buttons">
+			      <%= link_to_remote l(:button_delete), { :url => { :controller => 'customer_plus', :action => 'remove_project', :id => @customer, :project_id => project },
+			      																				:method => :post },
+			      																		  :class => 'icon icon-del' %>
+			  </td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+</div>
+
+<div class="splitcontentright">
+<% if projects.any? %>
+  <% remote_form_for(:customer, @customer, :url => {:controller => 'customer_plus', :action => 'add_projects', :id => @customer}, :method => :post) do |f| %>
+    <fieldset><legend><%=l(:label_project_new)%></legend>
+    
+		<p><%= text_field_tag 'project_search', nil, :size => "40" %></p>
+		<%= observe_field(:project_search,
+		                :frequency => 0.5,
+		                :update => :projects,
+		                :url => { :controller => 'customer_plus', :action => 'autocomplete_for_project', :id => @customer },
+		                :with => 'q')
+		                  %>
+		
+		<div id="projects">
+			<%= principals_check_box_tags 'project_ids[]', projects %>
+		</div>
+   	
+    <p><%= submit_tag l(:button_add) %></p>
+		</fieldset>
+  <% end %>
+<% end %>
+
+</div>

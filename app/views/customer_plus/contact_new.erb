@@ -1,0 +1,18 @@
+<div class="contextual">
+  <%= link_to_if_authorized l(:label_customer_list), {:controller => 'customers', :action => 'list', :customer => @customer}, :class => 'icon icon-users' %>
+</div>
+
+<h2><%= link_to l(:label_customer_plural), 'list' %> &#187; <%= 
+  link_to @customer.pretty_name, :controller => 'customer_plus', :action => :edit, :customer_id => @customer.id
+%>  &#187; <%= l(:label_customer_contact_new) %></h2>
+
+<% labelled_tabular_form_for :customer_contact, @customer_contact, :url =>{:action => 'contact_create', :customer => @customer} do |f|  %>
+  <%= render :partial => 'contact_form', :locals => {:f => f}  %>
+  <%= submit_tag l(:button_save) -%>
+<% end -%>
+
+<% content_for(:header_tags) do %>
+  <style type="text/css">
+    .icon-users { background-image: url(../../images/users.png); }
+  </style>
+<% end %>

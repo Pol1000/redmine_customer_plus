@@ -1,0 +1,22 @@
+<% form_tag({}) do -%>	
+<%= hidden_field_tag 'back_url', url_for(params) %>
+<div class="autoscroll">
+<table class="list issues">
+    <thead><tr>
+		<%= sort_header_tag('id', :caption => '#', :default_order => 'desc') %>
+        <% @fields.each do |field| %>
+          <%=   sort_header_tag(field.to_s, :caption => l("field_#{field}"),
+                                                            :default_order => 'asc') %>
+        <% end %>
+	</tr></thead>
+	<tbody>
+	<% @issues.each do |issue| -%>
+	<tr id="issue-<%= issue.id %>" class="<%= cycle('odd', 'even') %> <%= issue.css_classes %>">
+		<td><%= link_to issue.id, :controller => 'customer_issues', :action => 'show', :id => issue %></td>
+        <% @fields.each do |field| %><%= content_tag 'td', column_content(field, issue), :class => field %><% end %>
+	</tr>
+	<% end -%>
+	</tbody>
+</table>
+</div>
+<% end -%>

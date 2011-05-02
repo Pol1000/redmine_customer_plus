@@ -5,13 +5,24 @@ class CustomerPlusController < ApplicationController
   
     
   def list
-
+    
     if (@project)
        conditions = ["customers_projects.project_id = '?'", @project.id]
     else
-        @current_letter = params[:letter] || 'A'
-        conditions = ["UPPER(customers.name) like '#{@current_letter}%%'"]
+       if(params[:name])
+        unless params[:name].blank?
+          name = "%#{params[:name].strip.downcase}%"
+          @current_letter =" "
+          conditions = ["LOWER(customers.name) LIKE ?",name]
+        end
+        
+       else        
+       @current_letter = params[:letter] || 'A'
+       conditions = ["UPPER(customers.name) like '#{@current_letter}%%'"]
+      end
+  
     end
+       
     @customers = Customer.find(:all, :include => [:projects], :conditions => conditions, :order => "customers.name asc") || []
   end
   

@@ -3,11 +3,7 @@
 </div>
 
 <h2><%= l(:label_customer_plural) %></h2>
-<% form_tag({}, :method => :get) do %>
-<fieldset>	
-<label><%= l(:customer_title) %>:</label><%= text_field_tag 'name', params[:name], :size => 30 %><%= submit_tag l(:button_apply), :class => "small", :name => nil %>
-</fieldset>
-<% end %>
+
 <% if @current_letter %>
 <div class="letters">
 <%

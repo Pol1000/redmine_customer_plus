@@ -12,9 +12,6 @@
     <p>Contratto di manutenzione: <%= @customer.contratto_manutenzione? ? 'sì' : 'no' %></p>
     <p>Manutenzione sistemistica: <%= @customer.manutenzione_sistemistica? ? 'sì' : 'no' %></p>
   </div>
-  
-  <%= link_to l(:label_create_issue), :controller => 'customer_plus', :action => 'create_issue' , :customer =>@customer %>
-  
   <% unless @customer.contacts.empty? %>
     <h3><%= l(:label_customer_contacts) %></h3>
     <% @customer.contacts.each do |contact| %>

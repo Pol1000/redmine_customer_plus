@@ -34,6 +34,23 @@ class CustomerPlusController < ApplicationController
     @customer = Customer.find_by_id(params[:customer_id])
   end
   
+  def create_issue
+   @customer = Customer.find(params[:customer])
+   @progetti_cliente = @customer.projects
+   respond_to do |format|
+        format.html { render :template => 'customer_plus/elenco_progetti', :layout => !request.xhr? }
+   end
+ end
+ 
+  def confermate_create
+   @customer = params[:customer]
+   @progetto = Project.find_by_id(params[:selected_id])
+   if(@progetto)
+      redirect_to :controller => 'issues', :action => 'new', :project_id =>@progetto, :customer => @customer
+   else
+     redirect_to :controller =>'customer_plus',:action=>'create_issue', :customer =>@customer
+  end
+  end
   # def select
   #   @customers = Customer.find(:all)
   # end

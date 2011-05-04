@@ -9,6 +9,8 @@ it:
   permission_view_customer_attachments: Vedi allegati
   customer_title: Cliente
   label_customer: Cliente
+  project: Progetti associati
+  label_create_issue: 'Crea segnalazione'
   label_customer_plural: Elenco clienti
   label_customer_information: Dettaglio cliente
   label_customer_edit_information: Modifica dettaglio cliente

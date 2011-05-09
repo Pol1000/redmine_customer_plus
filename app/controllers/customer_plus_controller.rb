@@ -210,5 +210,20 @@ class CustomerPlusController < ApplicationController
   end
   
   
+  def go_to_customer
+  
+   @issue = Issue.find_by_id(params[:issue])
+  
+   @issue.custom_field_values.each do |value|
+              if Setting["plugin_redmine_customer_plus"]['save_customer_to'].include?(value.custom_field.id.to_s)
+                  @customer = Customer.find(:all, :conditions => {:name => value.value })
+                  if(@customer)
+                  
+                    redirect_to :action => "show", :customer_id =>@customer
+                  end
+              end
+          end
+  
+  end
   
 end

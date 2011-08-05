@@ -30,8 +30,13 @@ class CustomerUserHooks < Redmine::Hook::ViewListener
   
   def view_issues_show_details_bottom(params)
     @issue = Issue.find_by_id(params[:issue])
-    html = ""
-    html += link_to("vedi cliente", {:controller => 'customer_plus', :action => 'go_to_customer', :issue => @issue})
-    html
+    
+    if @issue.project.module_enabled?(:customers)
+      html = ""
+      html += "<tr>"
+      html += link_to("vedi cliente", {:controller => 'customer_plus', :action => 'go_to_customer', :issue => @issue})
+      html += "</tr>"
+      html
+    end
   end
 end

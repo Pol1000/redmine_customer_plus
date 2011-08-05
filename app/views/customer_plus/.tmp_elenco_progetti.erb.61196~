@@ -1,14 +1,5 @@
 <% form_tag({:action => 'confermate_create'}, :class => "tabular") do %>
 <fieldset>	
- <% if @progetti_cliente.size==0 %>
- <p>
-   <label>Nessun progetto associato</label>
-  
-  </p>
-  </fieldset>	
-<%= link_to l(:button_cancel), :controller => 'customer_plus', :action => 'list' %>
-
- <% else%>
  <p>
    <label><%=l(:project) %></label>
    <%= hidden_field_tag('customer', @customer.id) %>
@@ -19,5 +10,4 @@
   </p>
   </fieldset>	
 <%= submit_tag l(:button_apply) %>
-<% end %>
 <% end %>

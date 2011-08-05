@@ -37,8 +37,17 @@ class CustomerPlusController < ApplicationController
   def create_issue
    @customer = Customer.find(params[:customer])
    @progetti_cliente = @customer.projects
-   respond_to do |format|
-        format.html { render :template => 'customer_plus/elenco_progetti', :layout => !request.xhr? }
+   
+   if @progetti_cliente.size == 1
+         @selected = @progetti_cliente[0]
+         @selected_id = @selected.id
+       redirect_to :action => 'confermate_create',:customer =>@customer, :selected_id=>@selected_id
+ 
+   else
+      respond_to do |format|
+          format.html { render :template => 'customer_plus/elenco_progetti', :layout => !request.xhr? }
+        
+     end
    end
  end
  

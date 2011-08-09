@@ -1,7 +1,7 @@
 <h2><%= l(:label_customer) %></h2>
   
   <%= link_to l(:label_create_issue),
-            {:controller => 'customer_plus', :action => 'create_issue',:customer =>@customer },
+            {:controller => 'customer_plus', :action => 'create_issue',:customer =>@customer,},
                           :class => 'icon icon-add' %>
 						  
 <% unless @customer.nil? -%>
@@ -35,9 +35,21 @@
   </style>
 <% end %>
 
-
-  <%= link_to ("Segnalazioni del Cliente"),
-            {:controller => 'customer_plus', :action => 'customer_issue',:customer =>@customer } %>
-
- 
+  <h3><%= ("Segnalazioni dell'utente") %></h3>
+ <%
+  @customer= Customer.find_by_id(params[:customer_id])
+      @issue = Issue.all(:conditions => {:project_id => @customer.projects})
+		@issue.each do |issue_to_control|
+		
+       		issue_to_control.custom_field_values.each do |value|
+            	  if (Setting["plugin_redmine_customer_plus"]['save_customer_to'].include?(value.custom_field.id.to_s)) && (@customer.name == value.value)
+					%>
+                	 <p>
+    					<%=link_to issue_to_control.subject, :controller => 'issues', :action => 'show', :id => issue_to_control.id  %>
+  					 </p>
+				  <%
+              	end
+         	 end
+		end
+%>
    

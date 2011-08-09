@@ -1,7 +1,7 @@
 <h2><%= l(:label_customer) %></h2>
   
   <%= link_to l(:label_create_issue),
-            {:controller => 'customer_plus', :action => 'create_issue',:customer =>@customer },
+            {:controller => 'customer_plus', :action => 'create_issue',:customer =>@customer,},
                           :class => 'icon icon-add' %>
 						  
 <% unless @customer.nil? -%>
@@ -35,9 +35,6 @@
   </style>
 <% end %>
 
-
-  <%= link_to ("Segnalazioni del Cliente"),
-            {:controller => 'customer_plus', :action => 'customer_issue',:customer =>@customer } %>
-
- 
-   
+    <p>
+    	<%= link_to l(:label_issue_view_all), :controller => 'issues', :action => 'index', :project_id => @project, :set_filter => 1 %>
+   </p>

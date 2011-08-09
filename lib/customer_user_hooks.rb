@@ -34,7 +34,7 @@ class CustomerUserHooks < Redmine::Hook::ViewListener
     if @issue.project.module_enabled?(:customers)
       html = ""
       html += "<tr>"
-      html += link_to("vedi cliente", {:controller => 'customer_plus', :action => 'go_to_customer', :issue => @issue})
+      html += link_to("vedi cliente", {:controller => 'customer_plus', :action => 'go_to_customer', :issue => @issue}, :class => 'icon icon-checked' )
       html += "</tr>"
       html
     end

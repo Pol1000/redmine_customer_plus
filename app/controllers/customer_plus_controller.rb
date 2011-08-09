@@ -187,6 +187,17 @@ class CustomerPlusController < ApplicationController
     end
   end
   
+  
+  
+    def customer_issue
+         respond_to do |format|
+        format.html { render :template => 'customer_plus/elenco_issue', :layout => !request.xhr? }
+        end
+    end
+  
+  
+  
+  
   def contact_update
     @customer = Customer.find_by_id(params[:customer_contact][:customer_id])
     @contact = CustomerContact.find_by_id(params[:customer_contact][:id])    

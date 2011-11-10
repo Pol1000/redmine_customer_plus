@@ -1,0 +1,40 @@
+fr:
+  project_module_customer_issues: "Demandes client"
+  customer_plus_title: Gestion client
+  customer_issues_title: Demandes
+  customer_issues_new_title: Nouvelle demande
+  permission_view_customer_issues: Vedi segnalazioni
+  permission_list_customer_issues: Elenco segnalazioni
+  permission_edit_customer_issues: Modifica segnalazioni
+  permission_view_customer_attachments: Vedi allegati
+  customer_title: Client
+  label_customer: Client
+  project: Projets associés
+  label_create_issue: 'Créer demande'
+  label_customer_plural: Liste clients
+  label_customer_information: Détail client
+  label_customer_edit_information: Modifier détail client
+  label_customer_assign_to_project: Assigner client au projet
+  label_customer_view: Afficher détail
+  label_customer_assign: Assigner
+  label_customer_list: Liste clients
+  label_customer_new: Nouveau client
+  field_customer_name: Nom
+  field_customer_company: Société
+  field_customer_address: Adresse
+  field_customer_phone: Telephone
+  field_customer_email: Email
+  field_customer_website: Site web
+  field_customer_skype: Skype
+  notice_successful_save: Enregistrement reussi
+  notice_unsuccessful_save: Enregistrement impossible
+  project_module_customer_module: Clients
+  permission_view_customer: Voir client
+  permission_assign_customer: Assigner client
+  permission_see_customer_list: Voir la liste clients
+  permission_edit_customer: Modifier client
+  field_customer: 'Client'
+  label_customer_contact: 'Contact'
+  label_customer_contacts: Contacts
+  label_customer_contact_new: 'Nouveau contact'
+  field_customer_field: 'Zone'

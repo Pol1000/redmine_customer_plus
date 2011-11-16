@@ -39,4 +39,8 @@ class CustomerUserHooks < Redmine::Hook::ViewListener
       html
     end
   end
+
+
+
+ 
 end

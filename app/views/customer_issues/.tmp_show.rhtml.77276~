@@ -21,9 +21,6 @@
     <th class="assigned-to"><%=l(:field_assigned_to)%>:</th><td class="assigned-to"><%= avatar(@issue.assigned_to, :size => "14") %><%= @issue.assigned_to ? link_to_user(@issue.assigned_to) : "-" %></td>
     <th class="due-date"><%=l(:field_due_date)%>:</th><td class="due-date"><%= format_date(@issue.due_date) %></td>
 </tr>
-<tr>
-	<%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
-</tr>
 <%= render_customer_custom_fields_rows(@issue) %>
 
 </table>
@@ -40,6 +37,7 @@
 
 <%= link_to_customer_attachments @issue %>
 
+<%= call_hook(:view_issues_show_description_bottom, :issue => @issue) %>
 
 <% if authorize_for('issue_relations', 'new') || @issue.relations.any? %>
 <hr />

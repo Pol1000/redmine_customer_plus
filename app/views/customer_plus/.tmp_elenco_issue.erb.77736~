@@ -6,7 +6,7 @@
 		@issue.each do |issue_to_control|
 		
        		issue_to_control.custom_field_values.each do |value|
-            	  if (Setting["plugin_redmine_customer_plus"]['save_customer_to'].include?(value.custom_field.id.to_s)) && (@customer.id == value.id)
+            	  if (Setting["plugin_redmine_customer_plus"]['save_customer_to'].include?(value.custom_field.id.to_s)) && (@customer.name == value.value)
 					%>
                 	 <p>
     					<%=link_to issue_to_control.subject, :controller => 'issues', :action => 'show', :id => issue_to_control.id  %>

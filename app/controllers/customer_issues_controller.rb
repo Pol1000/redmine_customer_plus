@@ -60,7 +60,22 @@ class CustomerIssuesController < ApplicationController
       per_page_option
     end
     
-    cond = "(#{Issue.table_name}.project_id = #{@project.id} AND #{Issue.table_name}.author_id = #{User.current.id})"
+    cond = "#{Issue.table_name}.project_id = #{@project.id} AND ((#{Issue.table_name}.author_id = #{User.current.id})"
+    
+    
+     @customer=Customer.find_by_id(User.current.customer_id)
+     
+     @id_custom=Setting["plugin_redmine_customer_plus"]['save_customer_to']
+     if(@customer)
+        cond+="OR ( '#{@customer.name.to_s}' IN (SELECT c.value FROM #{CustomValue.table_name} c WHERE c.custom_field_id = #{@id_custom} "
+        cond+=" AND c.customized_type = 'Issue' AND c.customized_id = #{Issue.table_name}.id))"
+     end
+
+      
+  
+    cond+=")"
+    
+    
     cond += " OR (#{Issue.table_name}.id IN 
         (SELECT #{Watcher.table_name}.watchable_id FROM #{Watcher.table_name} 
         WHERE #{Watcher.table_name}.user_id = #{User.current.id} AND #{Watcher.table_name}.watchable_type = 'Issue'))"

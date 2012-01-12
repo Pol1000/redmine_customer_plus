@@ -1,5 +1,7 @@
 <div class="contextual">
+<% if User.current.allowed_to?(:create_customers, @project, :global => true) %>
   <%= link_to l(:label_customer_new), {:controller => 'customer_plus', :action => 'new'}, :class => 'icon icon-add' %>
+  <%end%>
 </div>
 
 <h2><%= l(:label_customer_plural) %></h2>

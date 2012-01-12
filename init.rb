@@ -18,7 +18,8 @@ User.safe_attributes 'customer_id'
   end
   project_module :customers do
     permission :view_customers, {:customer_plus => [:list, :show]}
-    permission :edit_customers, {:customer_plus => [:edit, :update, :new, :create, :destroy]}
+    permission :edit_customers, {:customer_plus => [:edit, :update,  :create, :destroy]}
+    permission :create_customers, {:customer_plus => [:new]}
   end
   menu :project_menu, :customer_issues, {:controller => 'customer_issues', :action => 'list'}, :caption => :customer_issues_title
   menu :project_menu, :customer_issues_new, {:controller => 'customer_issues', :action => 'new'}, :caption => :customer_issues_new_title

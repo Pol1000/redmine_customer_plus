@@ -190,6 +190,29 @@ class CustomerPlusController < ApplicationController
   
   
     def customer_issue
+      
+    
+    cond=""
+     @customer=Customer.find(params[:customer])
+     
+     @id_custom=Setting["plugin_redmine_customer_plus"]['save_customer_to']
+     if(@customer)
+        cond+=" ( '#{@customer.name.to_s}' IN (SELECT c.value FROM #{CustomValue.table_name} c WHERE c.custom_field_id = #{@id_custom} "
+        cond+=" AND c.customized_type = 'Issue' AND c.customized_id = #{Issue.table_name}.id))"
+     end
+    
+
+   
+    query = {
+     
+      :conditions => [cond],
+      
+    }
+
+    @customerIssues = Issue.find(:all, query.merge({
+      :include => [:assigned_to, :tracker, :priority, :category, :fixed_version]
+    }))
+      
          respond_to do |format|
         format.html { render :template => 'customer_plus/elenco_issue', :layout => !request.xhr? }
         end

@@ -25,7 +25,7 @@ User.safe_attributes 'customer_id'
   menu :project_menu, :customer_issues_new, {:controller => 'customer_issues', :action => 'new'}, :caption => :customer_issues_new_title
   menu :project_menu, :customers, {:controller => 'customer_plus', :action => 'list'}, :caption => :label_customer_list
   
-  menu :top_menu, :customers, {:controller => 'customer_plus', :action => 'list'}, :caption => :customer_plus_title, :if => lambda{ User.current.admin? }, :last => true
+  menu :top_menu, :customers, {:controller => 'customer_plus', :action => 'list'}, :class => "icon icon-groupusers" , :caption => :customer_plus_title, :if => lambda{ User.current.admin? }
   
   settings :default => {
        'statuses' => []

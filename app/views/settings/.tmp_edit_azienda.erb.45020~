@@ -1,8 +1,0 @@
-<h2><%=l(:label_valore)%></h2>
-
-<% labelled_tabular_form_for :custom, @edit_custom, :url => {:action => 'update', :id => @edit_custom,:project_id => @project} do |f| %>
-<%= render :partial => 'form', :locals => { :f => f } %>
-
-<%= submit_tag l(:button_save) %>
-<%= link_to l(:button_cancel), :controller => 'linked_custom_fields', :action => 'gestione',:project_id => @project %>
-<% end %>

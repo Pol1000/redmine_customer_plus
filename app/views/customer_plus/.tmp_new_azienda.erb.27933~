@@ -1,9 +1,0 @@
-<h2><%=l(:label_valore)%></h2>
-
-<% labelled_tabular_form_for :azienda, @azienda, :url => {:action => 'create_azienda'} do |f| %>
-<%= render :partial => 'form_azienda', :locals => { :f => f } %>
-
-
-<%= submit_tag l(:button_create) %>
-<%= link_to l(:button_cancel), :controller => 'customer_plus', :action => 'gestione_aziende'%>
-<% end %>

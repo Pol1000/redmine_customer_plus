@@ -11,7 +11,6 @@
     <p> <%= l(:field_customer_phone) %>: <%= h @customer.phone %> </p>
     <p> <%= l(:field_customer_email) %>: <%= mail_to @customer.email unless @customer.email.blank? %> </p>
     <p> <%= l(:field_customer_website) %>: <%= link_to @customer.website unless @customer.website.blank? %> </p>
-	<p> <%= 'Cliente di ' %>: <%= h @aziendaCorrelata %> </p>
     <p>Teleassistenza: <%= @customer.teleassistenza? ? 'sì' : 'no' %></p>
     <p>Teleassistenza sistemistica: <%= @customer.teleassistenza_sistemistica? ? 'sì' : 'no' %></p>
     <p>Contratto di manutenzione: <%= @customer.contratto_manutenzione? ? 'sì' : 'no' %></p>

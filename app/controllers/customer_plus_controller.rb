@@ -28,6 +28,11 @@ class CustomerPlusController < ApplicationController
   
   def show
     @customer = Customer.find_by_id(params[:customer_id])
+    @azienda = Aziende.find_by_id(@customer.azienda)
+    if(@azienda)
+    
+      @aziendaCorrelata = @azienda.ragSociale
+    end
   end
   
   def edit
@@ -267,6 +272,59 @@ class CustomerPlusController < ApplicationController
               end
           end
   
+end
+
+
+
+  def gestione_aziende
+    
+     respond_to do |format|
+        format.html { render :template => 'settings/gestione_aziende', :layout => !request.xhr? }
+        end
   end
+
+
+
+ def edit_azienda
+         @edit_azienda = Aziende.find_by_id(params[:id])
+        
+     end
+
+      def new_azienda
+        @azienda = Aziende.new
+      end
+  
+    def create_azienda
+     @azienda = Aziende.new(params[:azienda])
+      if @azienda.save
+        flash[:notice] = l(:notice_successful_create)
+       redirect_to :controller => 'customer_plus', :action => 'gestione_aziende'
+       else
+      render :action => 'new_azienda'
+      end   
+    end
+
+
+  def update_azienda
+    @azienda = Aziende.find_by_id(params[:id])
+    if request.post? and @azienda.update_attributes(params[:azienda])
+      flash[:notice] = l(:notice_successful_update)
+      redirect_to :action => "gestione_aziende"
+    else
+      render :action => "edit_azienda", :id => params[:id]
+    end
+  end
+
+
+   def destroy_azienda
+   @azienda = Aziende.find_by_id(params[:id])
+    if @azienda.destroy
+      flash[:notice] = l(:notice_successful_delete)
+    else
+      flash[:error] = l(:notice_unsuccessful_save)
+    end
+    redirect_to :controller => 'customer_plus', :action => 'gestione_aziende'
+    end
+
   
 end

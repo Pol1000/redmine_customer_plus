@@ -16,11 +16,6 @@
   <p>
     <%= f.text_field 'website', :label=>l(:field_customer_website) -%>
   </p>
- <p>
-   <label><%='Cliente di' %></label>
-	 <%= select_tag('customer[azienda]',content_tag('option', l(:label_nobody), :value => 'NULL') +
-                                   options_from_collection_for_select(Aziende.findAll, :id, :ragSociale)) %>			
- </p>
   <p>
     <%= f.check_box 'teleassistenza', :label => 'Teleassistenza' %>
   </p>

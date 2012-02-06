@@ -1,0 +1,21 @@
+<% @aziende = Aziende.findAll()%>
+
+<%= link_to l(:label_create_custom_new),
+            {:controller => 'customer_plus', :action => 'new_azienda'},
+                          :class => 'icon icon-add' %>
+
+
+<% @aziende.each do |azienda| %>
+  <p>
+   <label><big><b><%= azienda.ragSociale %></b></big></label> 
+   <%= link_to l(:label_edit), {:controller => 'customer_plus', :action => 'edit_azienda', :id => azienda.id}, {:class => 'icon icon-edit' } %>
+   <%= link_to l(:label_delete), {:controller => 'customer_plus', :action => 'destroy_azienda', :id => azienda.id}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+	<br>
+
+  </p>
+  <br>
+  <br>
+<% end %>
+
+</div>
+

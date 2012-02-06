@@ -1,0 +1,18 @@
+<%= error_messages_for 'custom' %>
+
+<div class="box">
+ <p>
+   <label><%=l(:label_type) %></label>
+	 <%= select_tag('custom[tipologia]',content_tag('option', l(:label_nobody), :value => 'NULL') +
+                                   options_from_collection_for_select(TypeCustomFields.findAll, :id, :descrizione, @tipologia.id)) %>			
+ </p>
+ <p>
+ 	<%=observe_field :custom_tipologia, :url => {:controller => 'linked_custom_fields', :action => :filtra_padre_per_categoria},
+                                     :update => :padre,
+                                     :with => :tipologia %>       
+	 <div id='padre'></div>
+ </p>
+ <p>
+    <%= f.text_field :valore, :label=>l(:label_valore), :required => true-%>
+ </p>
+</div>

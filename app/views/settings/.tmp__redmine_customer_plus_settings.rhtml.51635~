@@ -78,7 +78,5 @@ issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table
   <div style="clear: both"></div>
   <br><br>
   </div>
- <%= link_to ("Gestione Aziende"),
-            {:controller => 'customer_plus', :action => 'gestione_aziende'} %>
 
 </div>

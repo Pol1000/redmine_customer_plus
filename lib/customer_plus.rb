@@ -32,8 +32,9 @@ module RedmineCustomerPlus
 
     def visible_to_customer?
       shown_changes = Setting["plugin_redmine_customer_plus"]["changes"] ||= {}
-      return true if details.empty? && shown_changes['just_comments']
-      return true if has_visible_to_customer_detail?
+      send_mail =  shown_changes['mail']
+      return true if details.empty? && shown_changes['just_comments'] && send_mail
+      return true if has_visible_to_customer_detail? && send_mail
       return false
     end
     
@@ -50,12 +51,11 @@ module RedmineCustomerPlus
       redmine_headers 'Project' => issue.project.identifier,
                       'Issue-Id' => issue.id,
                       'Issue-Author' => issue.author.login
-      redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
-      mail = Setting["plugin_redmine_customer_plus"]["mail"]
+      redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to     
       message_id journal
       references issue
       @author = journal.user
-      if (journal.visible_to_customer && mail)
+      if journal.visible_to_customer?
         notified = issue.project.notified_users
         # Author and assignee are always notified unless they have been locked
         notified << issue.author if issue.author && issue.author.active?

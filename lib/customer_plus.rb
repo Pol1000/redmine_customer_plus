@@ -51,11 +51,11 @@ module RedmineCustomerPlus
                       'Issue-Id' => issue.id,
                       'Issue-Author' => issue.author.login
       redmine_headers 'Issue-Assignee' => issue.assigned_to.login if issue.assigned_to
-
+      mail = Setting["plugin_redmine_customer_plus"]["mail"]
       message_id journal
       references issue
       @author = journal.user
-      if journal.visible_to_customer?
+      if (journal.visible_to_customer && mail)
         notified = issue.project.notified_users
         # Author and assignee are always notified unless they have been locked
         notified << issue.author if issue.author && issue.author.active?

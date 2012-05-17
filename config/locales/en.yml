@@ -26,3 +26,4 @@ en:
   notice_successful_save: Saved
   notice_unsuccessful_save: Could not save
   field_customer: 'Customer'
+  label_mail: Send mail

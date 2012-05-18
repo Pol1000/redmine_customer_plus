@@ -33,7 +33,7 @@ module RedmineCustomerPlus
     def visible_to_customer?
       shown_changes = Setting["plugin_redmine_customer_plus"]["changes"] ||= {}
       send_mail =  shown_changes['mail']
-      return true if details.empty? && shown_changes['just_comments'] && send_mail
+      return true if details.empty? && shown_changes['just_comments']
       return true if has_visible_to_customer_detail? && send_mail
       return false
     end

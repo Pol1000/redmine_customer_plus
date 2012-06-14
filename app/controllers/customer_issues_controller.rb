@@ -129,6 +129,7 @@ class CustomerIssuesController < ApplicationController
   end
 
   def set_dummy_custom_fields(issue)
+
     issue.custom_field_values.each do |value|
         next if value.custom_field.visible_to_current_customer?
         if value.custom_field.is_required? && (!value.value || value.value.empty?)
@@ -143,6 +144,13 @@ class CustomerIssuesController < ApplicationController
                 value.value = value.custom_field.default_value
             end
         end
+               if User.current.customer_id 
+               @customer = Customer.find_by_id(User.current.customer_id)
+              if Setting["plugin_redmine_customer_plus"]['save_customer_to'].include?(value.custom_field.id.to_s)
+                  value.value = @customer.name
+              end
+          
+      end
     end
   end
   private :set_dummy_custom_fields
@@ -179,14 +187,7 @@ class CustomerIssuesController < ApplicationController
       #nothing
     else
       set_dummy_custom_fields(@issue)
-      if User.current.customer_id && Setting["plugin_redmine_customer_plus"]['save_customer_to'].is_a?(Array)
-          customer = Customer.find_by_id(User.current.customer_id)
-          @issue.custom_field_values.each do |value|
-              if Setting["plugin_redmine_customer_plus"]['save_customer_to'].include?(value.custom_field.id.to_s)
-                  value.value = customer.name
-              end
-          end
-      end
+
       requested_status = IssueStatus.find_by_id(params[:issue][:status_id])
       # Check that the user is allowed to apply the requested status
       @issue.status = (@allowed_statuses.include? requested_status) ? requested_status : default_status

@@ -1,0 +1,45 @@
+<h2><%= l(:label_customer) %></h2>
+  
+  <%= link_to l(:label_create_issue),
+            {:controller => 'customer_plus', :action => 'create_issue',:customer =>@customer },
+                          :class => 'icon icon-add' %>
+						  
+<% unless @customer.nil? -%>
+  <div class="box">
+    <p> <%= l(:field_customer_name) %>: <%= h @customer.name %> </p>
+    <p> <%= l(:field_customer_address) %>: <%= h @customer.address %> </p>
+    <p> <%= l(:field_customer_phone) %>: <%= h @customer.phone %> </p>
+	 <p> <%= l(:field_customer_fax) %>: <%= h @customer.fax %> </p>
+    <p> <%= l(:field_customer_email) %>: <%= mail_to @customer.email unless @customer.email.blank? %> </p>
+    <p> <%= l(:field_customer_website) %>: <%= link_to @customer.website unless @customer.website.blank? %> </p>
+	<p> <%= 'Cliente di ' %>: <%= h @aziendaCorrelata %> </p>
+    <p>Teleassistenza: <%= @customer.teleassistenza? ? 'sì' : 'no' %></p>
+    <p>Teleassistenza sistemistica: <%= @customer.teleassistenza_sistemistica? ? 'sì' : 'no' %></p>
+    <p>Contratto di manutenzione: <%= @customer.contratto_manutenzione? ? 'sì' : 'no' %></p>
+    <p>Manutenzione sistemistica: <%= @customer.manutenzione_sistemistica? ? 'sì' : 'no' %></p>
+  </div>
+  
+
+    
+  <% unless @customer.contacts.empty? %>
+    <h3><%= l(:label_customer_contacts) %></h3>
+    <% @customer.contacts.each do |contact| %>
+       <%= render :partial => 'contact', :locals => {:customer_contact => contact}  %>
+    <% end %>
+  <% end %>
+<% else %>
+  <p class="nodata"><%=l(:label_no_data)%></p>
+<% end %>
+
+<% content_for(:header_tags) do %>
+  <style type="text/css">
+    .icon-users { background-image: url(../../images/users.png); }
+  </style>
+<% end %>
+
+
+  <%= link_to ("Segnalazioni del Cliente"),
+            {:controller => 'customer_plus', :action => 'customer_issue',:customer =>@customer } %>
+
+ 
+   

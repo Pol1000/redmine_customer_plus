@@ -5,8 +5,11 @@
 		
      					%>
                 	 <p>
-    					<%=link_to value.subject, :controller => 'issues', :action => 'show', :id => value.id  %>
+                	 	<% stringa = '#'<< value.id.to_s << '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' << value.subject << '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspStato:  ' << value.status.name %>
+    					<%=link_to stringa , :controller => 'issues', :action => 'show', :id => value.id  %>
   					 </p>
+					<br>
+
 				  <%
 				
 		end

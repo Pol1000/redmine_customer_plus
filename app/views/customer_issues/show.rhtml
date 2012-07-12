@@ -1,4 +1,9 @@
-<%= render :partial => 'action_menu' %>
+<%if @issue.status && @issue.status.is_closed?%>
+   	<%if User.current.customer_id.nil? %>
+ 		<%= render :partial => 'action_menu' %>
+    <% end %>
+<% end %>
+
 
 <h2><%= @issue.tracker.name %> #<%= @issue.id %></h2>
 

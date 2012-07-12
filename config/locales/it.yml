@@ -23,6 +23,7 @@ it:
   field_customer_company: Azienda
   field_customer_address: Indirizzo
   field_customer_phone: Telefono
+  field_customer_fax: Fax
   field_customer_email: Email
   field_customer_website: Sito web
   field_customer_skype: Skype

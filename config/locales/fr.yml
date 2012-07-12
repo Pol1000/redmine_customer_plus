@@ -23,6 +23,7 @@ fr:
   field_customer_company: Société
   field_customer_address: Adresse
   field_customer_phone: Telephone
+  field_customer_fax: Fax
   field_customer_email: Email
   field_customer_website: Site web
   field_customer_skype: Skype

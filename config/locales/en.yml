@@ -20,6 +20,7 @@ en:
   field_customer_company: Company
   field_customer_address: Address
   field_customer_phone: Phone
+  field_customer_fax: Fax
   field_customer_email: Email
   field_customer_website: Website
   field_customer_skype: Skype

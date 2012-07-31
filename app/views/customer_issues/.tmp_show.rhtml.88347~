@@ -2,9 +2,6 @@
    	<%if User.current.customer_id.nil? %>
  		<%= render :partial => 'action_menu' %>
     <% end %>
-<% else%>
- 		<%= render :partial => 'action_menu' %>
-
 <% end %>
 
 
@@ -82,13 +79,7 @@
 
 
 <div style="clear: both;"></div>
-<%if @issue.status && @issue.status.is_closed?%>
-   	<%if User.current.customer_id.nil? %>
-         <%= render :partial => 'action_menu', :locals => {:replace_watcher => 'watcher2' } %>
-    <% end %>
-<% else%>
-    <%= render :partial => 'action_menu', :locals => {:replace_watcher => 'watcher2' } %>
-<% end %>
+<%= render :partial => 'action_menu', :locals => {:replace_watcher => 'watcher2' } %>
 
 <div style="clear: both;"></div>
 <% if authorize_for('customer_issues', 'edit') %>

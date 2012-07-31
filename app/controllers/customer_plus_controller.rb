@@ -13,12 +13,12 @@ class CustomerPlusController < ApplicationController
          else
           name = "%#{params[:name].strip.downcase}%"
           @current_letter =" "
-          conditions = ["customers_projects.project_id = '?' AND LOWER (customers.name) LIKE ?", @project.id, name]
+          conditions = ["customers_projects.project_id = '?' AND LOWER(customers.name) LIKE ?", @project.id, name]
         end
         
        else        
        @current_letter = params[:letter] || 'A'
-       conditions = ["customers_projects.project_id = '?' AND UPPER (customers.name) LIKE '#{@current_letter}%%'", @project.id]
+       conditions = ["customers_projects.project_id = '?' AND UPPER(customers.name) LIKE '#{@current_letter}%%'", @project.id]
       end
       
     else

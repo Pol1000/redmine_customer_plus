@@ -3,9 +3,9 @@
   <%= link_to l(:label_create_issue),
             {:controller => 'customer_plus', :action => 'create_issue',:customer =>@customer },
                           :class => 'icon icon-add' %>
-<div align="right">
+<td align="right">
   <%= link_to_if_authorized_g l(:button_edit), {:controller => 'customer_plus', :action => 'edit', :customer_id => @customer.id}, {:class => 'icon icon-edit' } %>
-</div> 
+</td> 
 <% unless @customer.nil? -%>
   <div class="box">
     <p> <%= l(:field_customer_name) %>: <%= h @customer.name %> </p>

@@ -1,5 +1,3 @@
-
-
 <% form_tag({}) do -%>	
 <%= hidden_field_tag 'back_url', url_for(params) %>
 <div class="autoscroll">
@@ -13,17 +11,10 @@
 	</tr></thead>
 	<tbody>
 	<% @issues.each do |issue| -%>
-	<%  if issue.author.customer_id == nil  %>
 	<tr id="issue-<%= issue.id %>" class="<%= cycle('odd', 'even') %> <%= issue.css_classes %>">
 		<td><%= link_to issue.id, :controller => 'customer_issues', :action => 'show', :id => issue %></td>
         <% @fields.each do |field| %><%= content_tag 'td', column_content(field, issue), :class => field %><% end %>
 	</tr>
-	<%else%>
-		<tr id="issue-<%= issue.id %>"class="<%= cycle('odd', 'even') %> priority-0">
-		<td><%= link_to issue.id, :controller => 'customer_issues', :action => 'show', :id => issue %></td>
-        <% @fields.each do |field| %><%= content_tag 'td', column_content(field, issue), :class => field %><% end %>
-	</tr>
-	<%end%>
 	<% end -%>
 	</tbody>
 </table>

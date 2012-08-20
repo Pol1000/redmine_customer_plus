@@ -1,0 +1,8 @@
+<%= "#{issue.tracker.name} ##{issue.id}: #{issue.subject}" %>
+<%= issue_url %>
+
+<%=l(:field_author)%>: <%= issue.author %>
+<%=l(:field_status)%>: <%= issue.status %>
+
+
+<%= issue.description %>

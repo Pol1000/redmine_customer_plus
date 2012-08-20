@@ -1,8 +1,0 @@
-<h1><%= link_to(h("#{issue.tracker.name} ##{issue.id}: #{issue.subject}"), issue_url) %></h1>
-
-<ul>
-<li><%=l(:field_author)%>: <%=h issue.author %></li>
-<li><%=l(:field_status)%>: <%=h issue.status %></li>
-</ul>
-
-<%= textilizable(issue, :description, :only_path => false) %>

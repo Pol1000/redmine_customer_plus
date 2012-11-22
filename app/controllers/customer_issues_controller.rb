@@ -67,7 +67,9 @@ class CustomerIssuesController < ApplicationController
      
      @id_custom=Setting["plugin_redmine_customer_plus"]['save_customer_to']
      if(@customer)
-        cond+="OR ( '#{@customer.name.to_s}' IN (SELECT c.value FROM #{CustomValue.table_name} c WHERE c.custom_field_id = #{@id_custom} "
+        name=@customer.name.to_s
+        name.gsub("'","\'")
+        cond+="OR ( \""+name+"\" IN (SELECT c.value FROM #{CustomValue.table_name} c WHERE c.custom_field_id = #{@id_custom} "
         cond+=" AND c.customized_type = 'Issue' AND c.customized_id = #{Issue.table_name}.id))"
      end
 
